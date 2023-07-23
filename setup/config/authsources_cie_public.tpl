@@ -60,11 +60,14 @@
             'telephoneNumber' => {{ORGANIZATIONTELEPHONENUMBER}},
             'extensions' => 
                 array (
-                    'Public' => NULL,
-                    'IPACode' => {{ORGANIZATIONCODE}},
-                    'Municipality' => {{ORGANIZATIONMUNICIPALITY}},
-                    'Province' => {{ORGANIZATIONPROVINCE}},
-                    'Country' => {{ORGANIZATIONCOUNTRY}},
+                    'ns' => 'https://www.cartaidentita.interno.gov.it/saml-extensions',
+                    'elements' => array (
+                        'Public' => NULL,
+                        'IPACode' => {{ORGANIZATIONCODE}},
+                        'Municipality' => {{ORGANIZATIONMUNICIPALITY}},
+                        'Province' => {{ORGANIZATIONPROVINCE}},
+                        'Country' => {{ORGANIZATIONCOUNTRY}},
+                    )
                 ),
             ),
         )
