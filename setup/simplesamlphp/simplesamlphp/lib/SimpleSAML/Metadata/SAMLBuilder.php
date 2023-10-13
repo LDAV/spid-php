@@ -113,6 +113,7 @@ class SAMLBuilder
     public function getEntityDescriptor()
     {
         $xml = $this->entityDescriptor->toXML();
+		$xml->setAttribute("xmlns:spid", "https://spid.gov.it/saml-extensions");
         $xml->ownerDocument->appendChild($xml);
 
         return $xml;
@@ -835,8 +836,8 @@ class SAMLBuilder
 
         if(isset($details['spid'])) {
             if($details['spid.codeType']=='IPACode') {
-                $ext_elem_code = $ext_dom->createElementNS('https://spid.gov.it/saml-extensions', 'spid:IPACode', $details['spid.codeValue']);
-                $ext_elem_type = $ext_dom->createElementNS('https://spid.gov.it/saml-extensions', 'spid:Public', '');
+                $ext_elem_code = $ext_dom->createElement('spid:IPACode', $details['spid.codeValue']);
+                $ext_elem_type = $ext_dom->createElement('spid:Public', '');
                 $eexts[] = new \SAML2\XML\Chunk($ext_elem_code);
                 $eexts[] = new \SAML2\XML\Chunk($ext_elem_type);
             }
