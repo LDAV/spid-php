@@ -134,9 +134,14 @@
                         if($idp=="EIDAS" || $idp=="EIDAS QA") $atcs_index = DEFAULT_EIDAS_ATCS_INDEX;
                         */
 
-                        $returnTo = $_SERVER['SCRIPT_URI'].'?action=login&idp='.$idp.'&client_id='.$client_id.'&redirect_uri='.$redirect_uri.'&state='.$state;
+                        $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https://" : "http://";
+                        $host = $_SERVER['HTTP_HOST'];
+                        $request_uri = $_SERVER['REQUEST_URI'];
+                        $script_uri = $protocol . $host . $request_uri;
+
+                        $returnTo = $script_uri.'?action=login&idp='.$idp.'&client_id='.$client_id.'&redirect_uri='.$redirect_uri.'&state='.$state;
                         setcookie('SPIDPHP_PROXYRETURNTO', $returnTo, time()+60*5, '/');
-                        $spidsdk->login($idp, $spidcie_level, $_SERVER['SCRIPT_URI'], $atcs_index);
+                        $spidsdk->login($idp, $spidcie_level, $script_uri, $atcs_index);
                         die();
                     }
 
